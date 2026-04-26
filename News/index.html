@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DukeNews — The News</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1208;
+      --paper: #f5f0e8;
+      --aged: #e8dfc8;
+      --accent: #8b1a1a;
+      --mustard: #c8922a;
+      --rule: #2a1f0e;
+      --light-rule: #c4b89a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,160,120,0.15) 27px, rgba(180,160,120,0.15) 28px);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--paper);
+      border-bottom: 4px double var(--rule);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 32px;
+      border-bottom: 1px solid var(--light-rule);
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: #5a4a2a;
+    }
+
+    .masthead {
+      text-align: center;
+      padding: 16px 32px 12px;
+      border-bottom: 3px solid var(--rule);
+      position: relative;
+    }
+
+    .masthead::before, .masthead::after {
+      content: '✦ ✦ ✦';
+      display: block;
+      font-size: 12px;
+      color: var(--mustard);
+      letter-spacing: 4px;
+      margin: 4px 0;
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      color: var(--ink);
+      text-transform: uppercase;
+      text-decoration: none;
+      display: block;
+    }
+
+    .site-title span { color: var(--accent); }
+
+    .tagline {
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #5a4a2a;
+      margin-top: 6px;
+    }
+
+    nav {
+      background: var(--rule);
+      display: flex;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--paper);
+      text-decoration: none;
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 10px 28px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.2s;
+    }
+
+    nav a:first-child { border-left: 1px solid rgba(255,255,255,0.15); }
+    nav a:hover, nav a.active { background: var(--accent); }
+
+    .hero-banner {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: sepia(20%) contrast(1.05);
+    }
+
+    .content-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .page-heading h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-style: italic;
+      color: var(--rule);
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 36px 0 20px;
+    }
+
+    .section-rule::before, .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--rule), transparent);
+    }
+
+    .section-rule h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      color: var(--rule);
+      font-style: italic;
+    }
+
+    .article-card {
+      border: 1px solid var(--light-rule);
+      background: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .article-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(15%) contrast(1.05);
+    }
+
+    .article-body {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid var(--light-rule);
+    }
+
+    .article-label {
+      font-family: 'Special Elite', cursive;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .article-body h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .article-body p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #3a2e1e;
+      font-weight: 300;
+    }
+
+    /* Text-only section */
+    .text-section {
+      background: rgba(255,255,255,0.4);
+      border: 1px solid var(--light-rule);
+      padding: 22px 26px;
+      margin-bottom: 24px;
+    }
+
+    .text-section p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #2a1f0e;
+    }
+
+    /* Obituaries */
+    .obituaries-box {
+      background: var(--aged);
+      border: 2px solid var(--rule);
+      padding: 22px 28px;
+      margin-bottom: 24px;
+    }
+
+    .obituaries-box .obit-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .obituaries-box .obit-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--light-rule);
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      color: #2a1f0e;
+    }
+
+    .obituaries-box .obit-list li:last-child { border-bottom: none; }
+
+    .obit-date {
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    /* Ad box */
+    .ad-box {
+      background: var(--ink);
+      color: var(--paper);
+      border: 3px double var(--mustard);
+      padding: 24px 28px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .ad-box h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-style: italic;
+      color: var(--mustard);
+      margin-bottom: 8px;
+    }
+
+    .ad-box p {
+      font-family: 'Special Elite', cursive;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--aged);
+    }
+
+    .ad-box a {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 22px;
+      background: var(--mustard);
+      color: var(--ink);
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--rule);
+      color: var(--aged);
+      text-align: center;
+      padding: 20px 32px;
+      margin-top: 48px;
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+    }
+
+    footer a {
+      color: var(--mustard);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    footer a:hover { text-decoration: underline; }
+    .footer-links { margin-bottom: 8px; }
+
+    @media (max-width: 640px) {
+      .article-card { grid-template-columns: 1fr; }
+      .article-body { border-left: none; border-top: 1px solid var(--light-rule); }
+      nav a { padding: 8px 14px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <span>Est. Los Santos</span>
+      <span>Your Most Trusted Source Since Day One</span>
+      <span>Print Edition</span>
+    </div>
+    <div class="masthead">
+      <div class="site-title">Duke<span>News</span></div>
+      <div class="tagline">All the News That's Fit to Grill</div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="http://dukenews.duckdns.org">Home</a>
+    <a href="http://dukenews.duckdns.org/News.html" class="active">News</a>
+    <a href="http://dukenews.duckdns.org/TipsAContact.html">Tips & Contact</a>
+  </nav>
+
+
+  <img class="hero-banner" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCopfG9KxFoIaemmup0ay7aYqKqnlanVV-5iterxqGjwP8z0PMBos7vOmfX-vcwL8ZY93KD_Jp9jlW7PMYJXE5Jd5ZL54x9Pkb_FOGKkoSkntHNxZalagPVwumbx_H6HQn7I1359TQfq1J1cmAe4zlLBwu5mIsBwxz59wqiF6hVRr0_UDNSuIIeWHNqtjggblwM1l8L-DZ468jrZGyT5D5-Ythb8WNJa0ay=w1280" alt="DukeNews Banner" />
+
+  <div class="content-wrap">
+
+    <div class="page-heading">
+      <h1>The News</h1>
+    </div>
+
+    <!-- ENTERTAINMENT -->
+    <div class="section-rule"><h2>Entertainment</h2></div>
+
+    <div class="article-card">
+      <img src="https://github.com/owencookieboss121-lab/DukeNews/blob/main/NewsEntertainment.png?raw=true" alt="Entertainment" />
+      <div class="article-body">
+        <div class="article-label">Entertainment</div>
+        <h3>Seeking Entertainment Journalists</h3>
+        <p>We are looking for journalists who want to follow up on entertainment news! Reach us via the Tips & Contact page if you're interested in joining our team.</p>
+        <a href="/tips-and-contact/index.html" style="display:inline-block;margin-top:14px;padding:8px 20px;background:var(--rule);color:var(--paper);font-family:'Special Elite',cursive;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;">Contact Us →</a>
+      </div>
+    </div>
+        <div class="text-section">
+      <p></p>
+    </div>
+
+    <!-- CRIME -->
+    <div class="section-rule"><h2>Crime</h2></div>
+
+    <div class="article-card">
+      <img src="https://raw.githubusercontent.com/owencookieboss121-lab/DukeNews/refs/heads/main/Law.png" alt="Crime" />
+      <div class="article-body">
+        <div class="article-label">Crime</div>
+        <h3>Crime Coverage Coming Soon</h3>
+        <p>Our reporters are investigating stories across Los Santos. Check back soon for full crime coverage — or submit a tip if you know something we should report on.</p>
+        <a href="/tips-and-contact/index.html" style="display:inline-block;margin-top:14px;padding:8px 20px;background:var(--accent);color:var(--paper);font-family:'Special Elite',cursive;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;">Submit a Tip →</a>
+      </div>
+    </div>
+
+        <div class="text-section">
+      <p></p>
+    </div>
+
+    <!-- BUSINESS -->
+    <div class="section-rule"><h2>Business</h2></div>
+
+    <div class="article-card">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCv9ajS76PMq2-1dXo9B2WXXN8zsSDbFANDP5zA1euwfTxZtlK5l5pbGo2QTIjMYqEswkw4N6bJptKveX0vD_N-_7uwB-UdnBBScpLHi1Lw0rnukOnQaaT635T_qN7u_1G_YpmGGoneHO7Q8AMp0wNaOdg1P_DbjjIjpS5SQjX1vKy1-iQkuzvXFo4d-GEh-iaoLKl0qFN1EmsnM8bsn3nNp3q4UQrJZ7b8wrI=w1280" alt="Business" />
+      <div class="article-body">
+        <div class="article-label">Business</div>
+        <h3>Want to showcase your business</h3>
+      <p>Contact us today via birdy or Email and well post you here! </p>
+    </div>
+
+    <div class="text-section">
+      <p>WE Can write about your business here if you want us to, we take a small payment but its worth it!</p>
+    </div>
+
+    <!-- OBITUARIES -->
+    <div class="section-rule"><h2>Obituaries</h2></div>
+
+    <div class="obituaries-box">
+      <p style="font-family:'Special Elite',cursive;font-size:11px;letter-spacing:0.2em;color:#5a4a2a;text-transform:uppercase;margin-bottom:4px;">2025 — Dates of Death</p>
+      <ul class="obit-list">
+        <li>
+          <span>Aries Steele</span>
+          <span class="obit-date">10-11-25</span>
+        </li>
+        <li>
+          <span>Lu Toodles</span>
+          <span class="obit-date">10-20-25</span>
+        </li>
+        <li>
+          <span>Unidentified</span>
+          <span class="obit-date">10-26-25</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- AD BOX -->
+    <div class="ad-box">
+      <h3>Want an Ad?</h3>
+      <p>Interested in advertising on our front page? Reach the widest audience in Los Santos.</p>
+      <a href="/tips-and-contact/index.html">Send Us an Email →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+    <a href="http://dukenews.duckdns.org">Home</a>
+    <a href="http://dukenews.duckdns.org/News.html">News</a>
+    <a href="http://dukenews.duckdns.org/TipsAContact.html">Tips & Contact</a>
+    </div>
+    <div>© DukeNews — Los Santos's Paper of Record</div>
+  </footer>
+
+</body>
+</html>
