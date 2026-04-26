@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DukeNews — Tips & Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1208;
+      --paper: #f5f0e8;
+      --aged: #e8dfc8;
+      --accent: #8b1a1a;
+      --mustard: #c8922a;
+      --rule: #2a1f0e;
+      --light-rule: #c4b89a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,160,120,0.15) 27px, rgba(180,160,120,0.15) 28px);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--paper);
+      border-bottom: 4px double var(--rule);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 32px;
+      border-bottom: 1px solid var(--light-rule);
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: #5a4a2a;
+    }
+
+    .masthead {
+      text-align: center;
+      padding: 16px 32px 12px;
+      border-bottom: 3px solid var(--rule);
+    }
+
+    .masthead::before, .masthead::after {
+      content: '✦ ✦ ✦';
+      display: block;
+      font-size: 12px;
+      color: var(--mustard);
+      letter-spacing: 4px;
+      margin: 4px 0;
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      color: var(--ink);
+      text-transform: uppercase;
+      text-decoration: none;
+      display: block;
+    }
+
+    .site-title span { color: var(--accent); }
+
+    .tagline {
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #5a4a2a;
+      margin-top: 6px;
+    }
+
+    nav {
+      background: var(--rule);
+      display: flex;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--paper);
+      text-decoration: none;
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 10px 28px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.2s;
+    }
+
+    nav a:first-child { border-left: 1px solid rgba(255,255,255,0.15); }
+    nav a:hover, nav a.active { background: var(--accent); }
+
+    .hero-banner {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(20%) contrast(1.05);
+    }
+
+    .content-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-heading h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-style: italic;
+      color: var(--rule);
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 36px 0 20px;
+    }
+
+    .section-rule::before, .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--rule), transparent);
+    }
+
+    .section-rule h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      color: var(--rule);
+      font-style: italic;
+    }
+
+    /* Staff card */
+    .staff-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border: 1px solid var(--light-rule);
+      background: rgba(255,255,255,0.4);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .staff-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 180px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(15%) contrast(1.05);
+    }
+
+    .staff-info {
+      padding: 22px 26px;
+      border-left: 1px solid var(--light-rule);
+    }
+
+    .staff-info .role {
+      font-family: 'Special Elite', cursive;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .staff-info h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .staff-info p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #3a2e1e;
+      font-weight: 300;
+    }
+
+    /* Hiring box */
+    .hiring-box {
+      background: var(--aged);
+      border: 2px solid var(--mustard);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .hiring-box h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-style: italic;
+      margin-bottom: 8px;
+      color: var(--rule);
+    }
+
+    .hiring-box p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #3a2e1e;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--paper);
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      margin-bottom: 10px;
+    }
+
+    /* Ad box */
+    .ad-box {
+      background: var(--ink);
+      color: var(--paper);
+      border: 3px double var(--mustard);
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .ad-box h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-style: italic;
+      color: var(--mustard);
+      margin-bottom: 10px;
+    }
+
+    .ad-box p {
+      font-family: 'Special Elite', cursive;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--aged);
+      line-height: 1.7;
+    }
+
+    /* Contact photo */
+    .contact-photo {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(15%) contrast(1.05);
+      border: 1px solid var(--light-rule);
+      margin-bottom: 24px;
+    }
+
+    footer {
+      background: var(--rule);
+      color: var(--aged);
+      text-align: center;
+      padding: 20px 32px;
+      margin-top: 48px;
+      font-family: 'Special Elite', cursive;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+    }
+
+    footer a {
+      color: var(--mustard);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    footer a:hover { text-decoration: underline; }
+    .footer-links { margin-bottom: 8px; }
+
+    @media (max-width: 600px) {
+      .staff-card { grid-template-columns: 1fr; }
+      .staff-info { border-left: none; border-top: 1px solid var(--light-rule); }
+      nav a { padding: 8px 14px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <span>Est. Los Santos</span>
+      <span>Your Most Trusted Source Since Day One</span>
+      <span>Print Edition</span>
+    </div>
+    <div class="masthead">
+      <div class="site-title">Duke<span>News</span></div>
+      <div class="tagline">All the News That's Fit to Grill</div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="http://dukenews.duckdns.org">Home</a>
+    <a href="http://dukenews.duckdns.org/News.html">News</a>
+    <a href="http://dukenews.duckdns.org/TipsAContact.html" class="active">Tips & Contact</a>
+  </nav>
+
+  <img class="hero-banner" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCopfG9KxFoIaemmup0ay7aYqKqnlanVV-5iterxqGjwP8z0PMBos7vOmfX-vcwL8ZY93KD_Jp9jlW7PMYJXE5Jd5ZL54x9Pkb_FOGKkoSkntHNxZalagPVwumbx_H6HQn7I1359TQfq1J1cmAe4zlLBwu5mIsBwxz59wqiF6hVRr0_UDNSuIIeWHNqtjggblwM1l8L-DZ468jrZGyT5D5-Ythb8WNJa0ay=w1280" alt="Hotdog News Banner" />
+
+  <div class="content-wrap">
+
+    <div class="page-heading">
+      <h1>Contact</h1>
+    </div>
+
+    <div class="section-rule"><h2>Our Team</h2></div>
+
+    <div class="staff-card">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUAkx-kZwefvrMJRH0adQOWzaot2RY8KI61kMHqN8wdg3sZwDYt_Qz240B90fLn0ql8kK8BLblYT24uKcjnObmKM6D6f9z9r8ST8OtdNikbE6pb-TOEp9uquNRI-hrRiDzK5g--zHkGJrYtP6YSn5dkxL9NEY0i1OnBxnV999z6PWLt3DmWw1HJ3Eftnq4qFXM0A7Lr0i2jBIR2r00hE9KEu-S63WRoC5pn3ZKw=w1280" alt="Duke John" />
+      <div class="staff-info">
+        <div class="role">Editor-in-Chief & Publisher</div>
+        <h3>Duke John</h3>
+        <p>Duke John leads Hotdog News as Editor-in-Chief and Publisher, overseeing all editorial decisions and publications. Got a story? John wants to hear it.</p>
+      </div>
+    </div>
+
+    <div class="section-rule"><h2>We're Hiring</h2></div>
+
+    <div class="hiring-box">
+      <div class="badge">Now Hiring</div>
+      <h3>Managing Editor</h3>
+      <p>Duke News is currently seeking a Managing Editor to join our growing team. If you have a nose for news and a passion for Los Santos's stories, we want to hear from you. Send your tips and inquiries via email.</p>
+    </div>
+
+    <img class="contact-photo" src="https://github.com/owencookieboss121-lab/DukeNews/blob/main/contact.png?raw=true" alt="Contact" />
+
+    <div class="ad-box">
+      <h3>Want an Ad?</h3>
+      <p>Interested in advertising on our front page?<br>If you're interested in reaching Los Santos's most discerning readers, send us an email and we'll get back to you.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+    <a href="http://dukenews.duckdns.org">Home</a>
+    <a href="http://dukenews.duckdns.org/News.html">News</a>
+    <a href="http://dukenews.duckdns.org/TipsAContact.html">Tips & Contact</a>
+    </div>
+    <div>© Hotdog News — Los Santos's Paper of Record</div>
+  </footer>
+
+</body>
+</html>
