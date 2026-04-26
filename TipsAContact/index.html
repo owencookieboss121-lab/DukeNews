@@ -19,6 +19,11 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
     body {
       background: var(--paper);
       color: var(--ink);
@@ -87,6 +92,7 @@
       background: var(--rule);
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -298,10 +304,76 @@
     footer a:hover { text-decoration: underline; }
     .footer-links { margin-bottom: 8px; }
 
-    @media (max-width: 600px) {
-      .staff-card { grid-template-columns: 1fr; }
-      .staff-info { border-left: none; border-top: 1px solid var(--light-rule); }
-      nav a { padding: 8px 14px; font-size: 10px; }
+    /* ─── MOBILE ─── */
+    @media (max-width: 640px) {
+      /* Header strip: stack vertically */
+      .header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        font-size: 9px;
+        padding: 6px 12px;
+        text-align: center;
+      }
+
+      .masthead {
+        padding: 12px 16px 10px;
+      }
+
+      /* Nav: share available width */
+      nav a {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+
+      /* Content padding */
+      .content-wrap {
+        padding: 24px 14px;
+      }
+
+      /* Page heading */
+      .page-heading h1 {
+        font-size: 30px;
+      }
+
+      /* Staff card: single column */
+      .staff-card {
+        grid-template-columns: 1fr;
+      }
+      .staff-card img {
+        min-height: 200px;
+        max-height: 220px;
+      }
+      .staff-info {
+        border-left: none;
+        border-top: 1px solid var(--light-rule);
+      }
+      .staff-info h3 {
+        font-size: 22px;
+      }
+
+      /* Hiring & ad boxes */
+      .hiring-box, .ad-box {
+        padding: 20px 16px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 16px;
+        font-size: 10px;
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+      }
+      .footer-links a {
+        margin: 0 6px;
+      }
     }
   </style>
 </head>
@@ -325,7 +397,7 @@
     <a href="http://dukenews.duckdns.org/TipsAContact" class="active">Tips & Contact</a>
   </nav>
 
-  <img class="hero-banner" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCopfG9KxFoIaemmup0ay7aYqKqnlanVV-5iterxqGjwP8z0PMBos7vOmfX-vcwL8ZY93KD_Jp9jlW7PMYJXE5Jd5ZL54x9Pkb_FOGKkoSkntHNxZalagPVwumbx_H6HQn7I1359TQfq1J1cmAe4zlLBwu5mIsBwxz59wqiF6hVRr0_UDNSuIIeWHNqtjggblwM1l8L-DZ468jrZGyT5D5-Ythb8WNJa0ay=w1280" alt="Hotdog News Banner" />
+  <img class="hero-banner" src="https://lh3.googleusercontent.com/sitesv/AA5AbUCopfG9KxFoIaemmup0ay7aYqKqnlanVV-5iterxqGjwP8z0PMBos7vOmfX-vcwL8ZY93KD_Jp9jlW7PMYJXE5Jd5ZL54x9Pkb_FOGKkoSkntHNxZalagPVwumbx_H6HQn7I1359TQfq1J1cmAe4zlLBwu5mIsBwxz59wqiF6hVRr0_UDNSuIIeWHNqtjggblwM1l8L-DZ468jrZGyT5D5-Ythb8WNJa0ay=w1280" alt="DukeNews Banner" />
 
   <div class="content-wrap">
 
@@ -340,7 +412,7 @@
       <div class="staff-info">
         <div class="role">Editor-in-Chief & Publisher</div>
         <h3>Duke John</h3>
-        <p>Duke John leads Hotdog News as Editor-in-Chief and Publisher, overseeing all editorial decisions and publications. Got a story? John wants to hear it.</p>
+        <p>Duke John leads DukeNews as Editor-in-Chief and Publisher, overseeing all editorial decisions and publications. Got a story? John wants to hear it.</p>
       </div>
     </div>
 
@@ -363,11 +435,11 @@
 
   <footer>
     <div class="footer-links">
-    <a href="http://dukenews.duckdns.org">Home</a>
-    <a href="http://dukenews.duckdns.org/News">News</a>
-    <a href="http://dukenews.duckdns.org/TipsAContact">Tips & Contact</a>
+      <a href="http://dukenews.duckdns.org">Home</a>
+      <a href="http://dukenews.duckdns.org/News">News</a>
+      <a href="http://dukenews.duckdns.org/TipsAContact">Tips & Contact</a>
     </div>
-    <div>© Hotdog News — Los Santos's Paper of Record</div>
+    <div>© DukeNews — Los Santos's Paper of Record</div>
   </footer>
 
 </body>
